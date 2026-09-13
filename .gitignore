@@ -1,0 +1,49 @@
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.egg-info/
+build/
+dist/
+*.lock
+*.csv
+*.parquet
+*.nc
+*.pkl
+*.tif
+*.mp4
+
+# Virtual environments / local tooling
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Documentation build products
+docs/_build/
+
+# Local data stores and temporary distributed state
+*.zarr/
+dask-tmp/
+
+# Generated benchmark scratch output written beside benchmark scripts.
+# Curated provenance under benchmark-runs/ remains intentionally trackable.
+benchmarks/*.jsonl
+benchmarks/*.html
+
+# Slurm stdout/stderr accidentally written at repository root by local/HPC runs.
+/*.cm4*.out
+/*.cm4*.err
+
+# Stray local build/export products
+output.pdf
+
+# Known study-specific generated results
+notebooks/new_notebooks/01_vultures/results/vulture_issf_choices.pkl

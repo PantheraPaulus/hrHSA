@@ -1,0 +1,5 @@
+# Acknowledgements
+
+We gratefully acknowledge support from the Competence Network for Scientific High Performance Computing in Bavaria (KONWIHR), which enabled the development of hrHSA and the systematic profiling, algorithmic optimisation, validation, and benchmarking required for reliable execution on modern many-core and high-performance computing systems ([www.konwihr.de](https://www.konwihr.de)).
+
+We further acknowledge access to computational infrastructure provided by the Leibniz Supercomputing Centre (LRZ)—including CoolMUC-4 and the terrabyte High Performance Data Analytics platform, operated jointly with the German Aerospace Center (DLR). These systems supported workloads ranging from workstation-scale analyses to billion-point spatial queries, hierarchical statistical inference, and raster prediction on environmental datasets far exceeding the memory capacity of a single compute node. Further details are available on the [LRZ Linux Cluster](https://doku.lrz.de/linux-cluster-10745672.html) and [terrabyte](https://docs.terrabyte.lrz.de/) documentation pages.

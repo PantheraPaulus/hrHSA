@@ -1,0 +1,232 @@
+%%{init: {
+  "theme": "base",
+  "flowchart": {
+    "curve": "basis",
+    "nodeSpacing": 35,
+    "rankSpacing": 45
+  },
+  "themeVariables": {
+    "fontFamily": "Arial, sans-serif",
+    "fontSize": "15px",
+    "primaryTextColor": "#29251F",
+    "lineColor": "#625A4E",
+    "background": "#FAF9F6"
+  }
+}}%%
+
+flowchart TB
+
+
+%% =========================================================
+%% INPUT
+%% =========================================================
+
+REL(["Telemetry relocations<br/>individual · time · geometry"]):::inputStyle
+ENV(["Environmental covariates<br/>static and/or dynamic"]):::inputStyle
+
+QUESTION{"What selection process<br/>should be modelled?"}:::decisionStyle
+
+REL --> QUESTION
+ENV --> QUESTION
+
+
+%% =========================================================
+%% RSF WORKFLOW
+%% =========================================================
+
+subgraph RSF["RSF — Resource Selection Function"]
+
+    direction TB
+
+    RSF_START["Define predictors and<br/>availability domain"]:::baseStyle
+
+    RSF_SAMPLE["Generate used / available data<br/>within individual domains"]:::baseStyle
+
+    RSF_METHOD{"Estimation framework"}:::decisionStyle
+
+    RSF_FREQ["Frequentist RSF<br/>logistic regression"]:::freqStyle
+
+    RSF_BAYES["Bayesian RSF<br/>hierarchical model"]:::bayesStyle
+
+    FEATURE["FeatureSpec<br/>linear · quadratic<br/>interactions · categorical"]:::specStyle
+
+    BAYES_CONFIG["Hierarchical structure<br/>random intercepts / slopes<br/>model priors"]:::bayesLightStyle
+
+    RSF_FIT_FREQ["Fit pooled<br/>FrequentistRSF"]:::freqStyle
+
+    RSF_FIT_BAYES["Fit hierarchical<br/>BayesianRSF"]:::bayesStyle
+
+    RSF_RESULTS_FREQ["FrequentistRSFFit<br/>coefficients · predictions<br/>response surface"]:::resultStyle
+
+    RSF_RESULTS_BAYES["BayesianRSFFit<br/>posterior coefficients<br/>shrinkage · response surface"]:::resultStyle
+
+    RSF_VALIDATE{"Validate?"}:::decisionStyle
+
+    RSF_LOIO["Leave-One-Individual-Out<br/>validation"]:::validationStyle
+
+    RSF_BOYCE["Boyce index<br/>P/E curves · diagnostics"]:::validationResultStyle
+
+    RSF_UNCERT{"Assess validation<br/>uncertainty / stability?"}:::decisionStyle
+
+    RSF_BOOT["Blocked bootstrap<br/>sampling uncertainty"]:::validationStyle
+
+    RSF_TEMP["Contiguous temporal blocks<br/>temporal stability"]:::validationStyle
+
+
+    RSF_START --> RSF_SAMPLE
+    RSF_SAMPLE --> RSF_METHOD
+
+    RSF_METHOD -->|"Frequentist"| RSF_FREQ
+    RSF_METHOD -->|"Bayesian"| RSF_BAYES
+
+    FEATURE --> RSF_FREQ
+    BAYES_CONFIG --> RSF_BAYES
+
+    RSF_FREQ --> RSF_FIT_FREQ
+    RSF_BAYES --> RSF_FIT_BAYES
+
+    RSF_FIT_FREQ --> RSF_RESULTS_FREQ
+    RSF_FIT_BAYES --> RSF_RESULTS_BAYES
+
+    RSF_METHOD -.-> RSF_VALIDATE
+
+    RSF_VALIDATE -->|"yes"| RSF_LOIO
+    RSF_LOIO --> RSF_BOYCE
+
+    RSF_BOYCE --> RSF_UNCERT
+    RSF_UNCERT -->|"bootstrap"| RSF_BOOT
+    RSF_UNCERT -->|"temporal"| RSF_TEMP
+
+end
+
+
+%% =========================================================
+%% SSF WORKFLOW
+%% =========================================================
+
+subgraph SSF["SSF — Step Selection Function"]
+
+    direction TB
+
+    SSF_START["Prepare trajectory<br/>and movement structure"]:::baseStyle
+
+    SSF_CHOICES["Generate movement-informed<br/>choice sets"]:::baseStyle
+
+    SSF_ANNOTATE["Annotate alternatives<br/>with environmental covariates"]:::baseStyle
+
+    SSF_OPTIONAL["Optional covariates<br/>dynamic vectors · movement terms"]:::specStyle
+
+    SSF_METHOD{"Estimation framework"}:::decisionStyle
+
+    SSF_FREQ["Frequentist SSF<br/>conditional logistic model"]:::freqStyle
+
+    SSF_BAYES["Bayesian SSF<br/>hierarchical categorical model"]:::bayesStyle
+
+    SSF_FREQ_ROUTE{"Pooling strategy"}:::decisionStyle
+
+    SSF_POOL["Pooled SSF<br/>fit()"]:::freqStyle
+
+    SSF_INDIV["Individual SSFs<br/>fit_individuals()"]:::freqLightStyle
+
+    SSF_BAYES_FIT["Hierarchical Bayesian SSF<br/>partial pooling"]:::bayesStyle
+
+    SSF_FREQ_RESULT["FrequentistSSFFit<br/>coefficients · choice scores<br/>selection opportunity"]:::resultStyle
+
+    SSF_INDIV_RESULT["IndividualSSFFits<br/>individual coefficients<br/>opportunity diagnostics"]:::resultStyle
+
+    SSF_BAYES_RESULT["BayesianSSFFit<br/>population + individual effects<br/>heterogeneity · choice scores"]:::resultStyle
+
+    SSF_VALIDATE{"Validate?"}:::decisionStyle
+
+    SSF_VALIDATION{"Validation design"}:::decisionStyle
+
+    SSF_LOIO["Leave-One-Individual-Out<br/>new-individual prediction"]:::validationStyle
+
+    SSF_TEMP["Temporal Block CV<br/>temporal generalisation"]:::validationStyle
+
+    SSF_VALID_RESULT["SSFValidationResult<br/>predictive diagnostics"]:::validationResultStyle
+
+
+    SSF_START --> SSF_CHOICES
+    SSF_CHOICES --> SSF_ANNOTATE
+    SSF_OPTIONAL --> SSF_ANNOTATE
+
+    SSF_ANNOTATE --> SSF_METHOD
+
+    SSF_METHOD -->|"Frequentist"| SSF_FREQ
+    SSF_METHOD -->|"Bayesian"| SSF_BAYES
+
+    SSF_FREQ --> SSF_FREQ_ROUTE
+    SSF_FREQ_ROUTE -->|"pooled"| SSF_POOL
+    SSF_FREQ_ROUTE -->|"individual"| SSF_INDIV
+
+    SSF_POOL --> SSF_FREQ_RESULT
+    SSF_INDIV --> SSF_INDIV_RESULT
+
+    SSF_BAYES --> SSF_BAYES_FIT
+    SSF_BAYES_FIT --> SSF_BAYES_RESULT
+
+    SSF_METHOD -.-> SSF_VALIDATE
+    SSF_VALIDATE -->|"yes"| SSF_VALIDATION
+
+    SSF_VALIDATION -->|"new individuals"| SSF_LOIO
+    SSF_VALIDATION -->|"new time periods"| SSF_TEMP
+
+    SSF_LOIO --> SSF_VALID_RESULT
+    SSF_TEMP --> SSF_VALID_RESULT
+
+end
+
+
+%% =========================================================
+%% MAIN ROUTES
+%% =========================================================
+
+QUESTION -->|"Habitat use relative<br/>to availability"| RSF_START
+
+QUESTION -->|"Selection conditional<br/>on movement"| SSF_START
+
+
+%% =========================================================
+%% FINAL INTERPRETATION
+%% =========================================================
+
+SYNTHESIS(["Ecological inference<br/>effect estimates · prediction<br/>individual heterogeneity · validation"]):::finalStyle
+
+RSF_RESULTS_FREQ --> SYNTHESIS
+RSF_RESULTS_BAYES --> SYNTHESIS
+RSF_BOYCE -.-> SYNTHESIS
+
+SSF_FREQ_RESULT --> SYNTHESIS
+SSF_INDIV_RESULT --> SYNTHESIS
+SSF_BAYES_RESULT --> SYNTHESIS
+SSF_VALID_RESULT -.-> SYNTHESIS
+
+
+%% =========================================================
+%% STYLING — GREEN → BROWN → DARK RED
+%% =========================================================
+
+classDef inputStyle fill:#F4F2ED,stroke:#625B50,stroke-width:1.7px,color:#292620
+
+classDef baseStyle fill:#F1F3EB,stroke:#59634A,stroke-width:1.7px,color:#293020
+
+classDef decisionStyle fill:#EEE6D8,stroke:#795F42,stroke-width:2px,color:#3B2C1E
+
+classDef freqStyle fill:#E2EBDD,stroke:#48633F,stroke-width:2px,color:#24301F
+
+classDef freqLightStyle fill:#F0F4EC,stroke:#64785A,stroke-width:1.7px,color:#2F3A29
+
+classDef bayesStyle fill:#E9D8D4,stroke:#783129,stroke-width:2px,color:#3C1814
+
+classDef bayesLightStyle fill:#F3EAE7,stroke:#925348,stroke-width:1.7px,color:#49251F
+
+classDef validationStyle fill:#E8E6CF,stroke:#70713A,stroke-width:1.8px,color:#363719
+
+classDef validationResultStyle fill:#EEE3D3,stroke:#8A633B,stroke-width:1.8px,color:#3D2C1B
+
+classDef resultStyle fill:#F2E8DC,stroke:#8B6040,stroke-width:1.8px,color:#3E2B1D
+
+classDef specStyle fill:#F2E5DF,stroke:#9A5945,stroke-width:1.7px,color:#47271F
+
+classDef finalStyle fill:#E4D4CD,stroke:#672D27,stroke-width:2.4px,color:#351815

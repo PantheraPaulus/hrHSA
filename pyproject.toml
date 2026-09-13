@@ -1,0 +1,125 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "hrHSA"
+version = "0.1.0"
+description = "High-resolution habitat and resource selection analysis for telemetry and movement ecology."
+readme = "README.md"
+requires-python = ">=3.10"
+
+authors = [
+    { name = "Paul Kasko" },
+]
+
+license = { file = "LICENSE" }
+
+keywords = [
+    "movement ecology",
+    "habitat selection",
+    "resource selection",
+    "RSF",
+    "SSF",
+    "iSSF",
+    "telemetry",
+    "spatial ecology",
+]
+
+dependencies = [
+    "numpy<2.5",
+    "pandas",
+    "geopandas",
+    "shapely",
+    "pyproj",
+    "scipy",
+    "scikit-learn",
+    "statsmodels",
+    "xarray",
+    "rioxarray",
+    "rasterio",
+    "matplotlib",
+]
+
+
+[project.optional-dependencies]
+
+# Raster storage and out-of-core I/O
+io = [
+    "zarr",
+    "pyarrow",
+]
+
+# Local/distributed Dask execution
+dask = [
+    "dask[distributed]",
+    "zarr",
+]
+
+# HPC execution
+hpc = [
+    "dask[distributed]",
+    "dask-jobqueue",
+    "zarr",
+    "pyarrow",
+]
+
+# Google Earth Engine integration
+earthengine = [
+    "earthengine-api",
+    "geemap",
+]
+
+# Bayesian inference
+bayesian = [
+    "pymc",
+    "arviz",
+]
+
+# Optional accelerated Bayesian samplers
+nutpie = [
+    "nutpie>=0.16.10",
+]
+
+# PyMC currently passes the pre-1.6 progress_bar adaptation argument
+# to BlackJAX. Keep constrained until the upstream incompatibility is resolved.
+blackjax = [
+    "blackjax<1.6",
+]
+
+# Reproducible Bayesian/HPC environment used by the benchmarking workflows
+bayesian-hpc = [
+    "pymc",
+    "arviz",
+    "nutpie>=0.16.10",
+    "blackjax<1.6",
+    "dask[distributed]",
+    "dask-jobqueue",
+    "zarr",
+    "pyarrow",
+]
+
+# Development and testing
+dev = [
+    "pytest",
+    "ruff",
+    "jupyter",
+    "nbconvert",
+]
+
+
+[project.urls]
+Homepage = "https://github.com/PantheraPaulus/hrHSA"
+Documentation = "https://hrhsa-public.readthedocs.io/"
+Repository = "https://github.com/PantheraPaulus/hrHSA"
+Issues = "https://github.com/PantheraPaulus/hrHSA/issues"
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
+[tool.ruff]
+line-length = 100
+src = ["src"]

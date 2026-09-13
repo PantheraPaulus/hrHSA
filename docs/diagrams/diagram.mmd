@@ -1,0 +1,318 @@
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "fontFamily": "Arial, sans-serif",
+    "fontSize": "15px",
+    "primaryTextColor": "#1f2937",
+    "lineColor": "#4b5563",
+    "tertiaryColor": "#ffffff"
+  }
+}}%%
+
+classDiagram
+direction TB
+
+
+%% =========================================================
+%% RSF CORE
+%% =========================================================
+
+class FeatureSpec:::specStyle {
+    +linear: list
+    +quadratic: list
+    +interactions: list
+    +categorical: list
+    +add_const: bool
+}
+
+
+class RSFAnalysis:::baseStyle {
+    <<abstract>>
+    +reloc
+    +env
+    +predictors: list
+    +id_col: str
+    +timestamp_col: str
+    +domain
+    +fit_: RSFFit
+    +validation_
+    +individuals
+    +domains
+    +prepare_domains()
+    +sample_training_data()
+    +fit()*
+    +validate()
+}
+
+
+class FrequentistRSF:::freqStyle {
+    +spec: FeatureSpec
+    +fit()
+}
+
+
+class BayesianRSF:::bayesStyle {
+    +binning: dict
+    +random_intercept: bool
+    +random_slopes: list
+    +model_kwargs: dict
+    +fit()
+}
+
+
+class RSFFit:::baseStyle {
+    <<abstract>>
+    +summary()*
+    +coefficients()*
+    +predict_surface()*
+}
+
+
+class FrequentistRSFFit:::freqStyle {
+    +model
+    +scaler
+    +spec: FeatureSpec
+    +meta: dict
+    +summary()
+    +coefficients()
+    +predict_points()
+    +predict_surface()
+}
+
+
+class BayesianRSFFit:::bayesStyle {
+    +model
+    +idata
+    +data: dict
+    +predictors: tuple
+    +summary()
+    +coefficients()
+    +posterior_correlation()
+    +shrinkage_summary()
+    +predict_surface()
+}
+
+
+%% =========================================================
+%% SSF CORE
+%% =========================================================
+
+class SSFAnalysis:::baseStyle {
+    <<abstract>>
+    +reloc
+    +env
+    +predictors: list
+    +id_col: str
+    +timestamp_col: str
+    +movement_
+    +choices_
+    +fit_: SSFFit
+    +validation_
+    +individuals
+    +choices
+    +prepare_choice_sets()
+    +annotate_static()
+    +annotate_dynamic_vectors()
+    +add_movement_terms()
+    +fit()*
+    +validate()
+}
+
+
+class FrequentistSSF:::freqStyle {
+    +fit()
+    +fit_individuals()
+}
+
+
+class BayesianSSF:::bayesStyle {
+    +model_kwargs: dict
+    +fit()
+}
+
+
+class SSFFit:::baseStyle {
+    <<abstract>>
+    +summary()*
+    +coefficients()*
+    +choice_scores()*
+}
+
+
+class FrequentistSSFFit:::freqStyle {
+    +model
+    +result
+    +data
+    +predictors: tuple
+    +scaling: dict
+    +summary()
+    +coefficients()
+    +choice_probabilities()
+    +choice_scores()
+    +selection_opportunity()
+}
+
+
+class BayesianSSFFit:::bayesStyle {
+    +model
+    +idata
+    +data
+    +predictors: tuple
+    +scaling: dict
+    +summary()
+    +coefficients()
+    +individual_coefficients()
+    +heterogeneity()
+    +choice_scores()
+}
+
+
+%% =========================================================
+%% VALIDATION STRATEGIES
+%% =========================================================
+
+class LeaveOneIndividualOut:::validationStyle {
+    +heldout
+    +seed: int
+    +run()
+}
+
+
+class TemporalBlockCV:::validationStyle {
+    +n_blocks: int
+    +holdout_block: int
+    +embargo: str
+    +seed: int
+    +run()
+}
+
+
+class BlockedBootstrap:::validationStyle {
+    +replicates: int
+    +block: str
+}
+
+
+class ContiguousTemporalBlocks:::validationStyle {
+    +folds: int
+    +unit: str
+}
+
+
+%% =========================================================
+%% VALIDATION RESULTS
+%% =========================================================
+
+class CrossValidationResult:::resultStyle {
+    +summary
+    +params
+    +boyce_bins
+    +diagnostics
+    +scheme
+    +analysis
+}
+
+
+class FrequentistLOIOResult:::resultStyle {
+    +calibration_bins
+    +plot_boyce_curves()
+    +plot_boyce_values()
+    +evaluate_uncertainty()
+}
+
+
+class BayesianLOIOResult:::resultStyle {
+    +posterior_correlation()
+    +collinearity_diagnostics()
+    +shrinkage_summary()
+    +evaluate_uncertainty()
+}
+
+
+class SSFValidationResult:::resultStyle {
+    +summary
+    +diagnostics
+    +scheme
+    +analysis
+}
+
+
+class ValidationUncertaintyResult:::resultStyle {
+    +baseline_summary
+    +replicate_summary
+    +method_summary
+    +curve_summary
+    +temporal_periods()
+}
+
+
+%% =========================================================
+%% INHERITANCE
+%% =========================================================
+
+RSFAnalysis <|-- FrequentistRSF
+RSFAnalysis <|-- BayesianRSF
+
+RSFFit <|-- FrequentistRSFFit
+RSFFit <|-- BayesianRSFFit
+
+SSFAnalysis <|-- FrequentistSSF
+SSFAnalysis <|-- BayesianSSF
+
+SSFFit <|-- FrequentistSSFFit
+SSFFit <|-- BayesianSSFFit
+
+CrossValidationResult <|-- FrequentistLOIOResult
+CrossValidationResult <|-- BayesianLOIOResult
+
+
+%% =========================================================
+%% MODEL / FIT RELATIONSHIPS
+%% =========================================================
+
+FrequentistRSF --> FeatureSpec : uses
+
+FrequentistRSF --> FrequentistRSFFit : fit()
+BayesianRSF --> BayesianRSFFit : fit()
+
+FrequentistSSF --> FrequentistSSFFit : fit()
+BayesianSSF --> BayesianSSFFit : fit()
+
+
+%% =========================================================
+%% VALIDATION RELATIONSHIPS
+%% =========================================================
+
+RSFAnalysis --> LeaveOneIndividualOut : validate()
+
+SSFAnalysis --> LeaveOneIndividualOut : validate()
+SSFAnalysis --> TemporalBlockCV : validate()
+
+LeaveOneIndividualOut --> CrossValidationResult : produces
+TemporalBlockCV --> SSFValidationResult : produces
+
+FrequentistLOIOResult --> BlockedBootstrap : uncertainty
+FrequentistLOIOResult --> ContiguousTemporalBlocks : stability
+
+BayesianLOIOResult --> BlockedBootstrap : uncertainty
+BayesianLOIOResult --> ContiguousTemporalBlocks : stability
+
+FrequentistLOIOResult --> ValidationUncertaintyResult : produces
+BayesianLOIOResult --> ValidationUncertaintyResult : produces
+
+
+%% =========================================================
+%% STYLING — EARTH / ECOLOGICAL PALETTE
+%% =========================================================
+
+classDef baseStyle fill:#F2EFE8,stroke:#5C564A,stroke-width:1.5px,color:#25231F
+
+classDef freqStyle fill:#DDE8D5,stroke:#48633F,stroke-width:1.8px,color:#24301F
+
+classDef bayesStyle fill:#E8D6D2,stroke:#7A3028,stroke-width:1.8px,color:#3C1814
+
+classDef validationStyle fill:#E5E4C9,stroke:#6E702F,stroke-width:1.6px,color:#343617
+
+classDef resultStyle fill:#E8D9C5,stroke:#8A633B,stroke-width:1.6px,color:#3D2C1B
+
+classDef specStyle fill:#E7CFC2,stroke:#9A513C,stroke-width:1.6px,color:#422319
