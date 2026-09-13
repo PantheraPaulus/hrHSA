@@ -1,12 +1,12 @@
-<p align="center">
-  <img src="docs/assets/logo.png" alt="hrHSA logo">
-</p>
-
 <h1 align="center">hrHSA</h1>
 
 <p align="center">
   <strong>High-resolution Habitat Selection Analysis</strong><br>
   Scalable inference for animal movement, habitat selection, and environmental dynamics.
+</p>
+
+<p align="center">
+  <img src="docs/assets/logo.png" alt="hrHSA logo">
 </p>
 
 <p align="center">
