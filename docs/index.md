@@ -1,4 +1,3 @@
-# hrHSA
 ```{thumbnail} assets/hrHSA_logo.png
 :width: 100%
 :alt: hrHSA Logo
