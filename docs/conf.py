@@ -92,6 +92,10 @@ html_sidebars = {
     "**": [],
 }
 
+html_context = {
+    "default_mode": "light",
+}
+
 html_static_path = ["_static"]
 
 html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
