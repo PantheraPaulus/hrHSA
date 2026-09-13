@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/assets/logo.png" alt="hrHSA logo">
+  <img src="docs/assets/hrHSA_logo.png" alt="hrHSA logo">
 </p>
 
 <p align="center">
