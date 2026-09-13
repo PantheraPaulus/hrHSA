@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo/logo_rsf2.png" width="600" alt="hrHSA logo">
+  <img src="docs/assets/logo.png" alt="hrHSA logo">
 </p>
 
 <h1 align="center">hrHSA</h1>
