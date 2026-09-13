@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-  <a href="https://hrhsa-public.readthedocs.io/en/latest/">Documentation</a>
+  <a href="https://hrhsa.readthedocs.io/en/latest/">Documentation</a>
   ·
-  <a href="https://hrhsa-public.readthedocs.io/en/latest/getting_started.html">Getting started</a>
+  <a href="https://hrhsa.readthedocs.io/en/latest/getting_started.html">Getting started</a>
   ·
-  <a href="https://hrhsa-public.readthedocs.io/en/latest/performance.html">Performance</a>
+  <a href="https://hrhsa.readthedocs.io/en/latest/performance.html">Performance</a>
 </p>
 
 ---
@@ -135,7 +135,7 @@ cv = rsf.validate(
 ```
 
 The complete workflow, including data preparation and interpretation, is developed in the
-[Getting started guide](https://hrhsa-public.readthedocs.io/en/latest/getting_started.html).
+[Getting started guide](https://hrhsa.readthedocs.io/en/latest/getting_started.html).
 
 ## From RSF to iSSF
 
@@ -162,7 +162,7 @@ joint habitat-selection and movement inference
 This common structure allows analyses to become progressively more mechanistic without changing the fundamental interpretation of habitat selection as **observed use relative to biologically meaningful alternatives**.
 
 The theoretical foundations are described in the
-[Theory](https://hrhsa-public.readthedocs.io/en/latest/theory.html)
+[Theory](https://hrhsa.readthedocs.io/en/latest/theory.html)
 documentation.
 
 ## Hierarchical Bayesian inference
@@ -210,7 +210,7 @@ benchmarking/scripts/
 Execution geometry is deliberately treated as workload- and architecture-specific rather than assuming that one worker layout is universally optimal.
 
 For transparency and reproducibility, the complete profiling methodology, scaling experiments, and practical guidance for calibrating hrHSA to a given system are documented in
-[Performance engineering and benchmarking](https://hrhsa-public.readthedocs.io/en/latest/performance.html).
+[Performance engineering and benchmarking](https://hrhsa.readthedocs.io/en/latest/performance.html).
 
 ## Case studies
 
@@ -223,24 +223,20 @@ The documentation develops the framework through three ecological applications o
 **Bearded vultures** extend the framework to dynamic SSF and iSSF models in which atmospheric conditions, terrain, and movement interact to generate a changing energetic landscape.
 
 See the
-[Case studies](https://hrhsa-public.readthedocs.io/en/latest/case-studies.html)
+[Case studies](https://hrhsa.readthedocs.io/en/latest/case-studies.html)
 for the complete analyses.
 
 ## Documentation
 
 The full documentation covers the scientific and computational framework in substantially greater detail:
 
-- [Getting started](https://hrhsa-public.readthedocs.io/en/latest/getting_started.html)
-- [Theory](https://hrhsa-public.readthedocs.io/en/latest/theory.html)
-- [Implementation](https://hrhsa-public.readthedocs.io/en/latest/implementation.html)
-- [Case studies](https://hrhsa-public.readthedocs.io/en/latest/case-studies.html)
-- [Performance engineering and benchmarking](https://hrhsa-public.readthedocs.io/en/latest/performance.html)
+- [Getting started](https://hrhsa.readthedocs.io/en/latest/getting_started.html)
+- [Theory](https://hrhsa.readthedocs.io/en/latest/theory.html)
+- [Implementation](https://hrhsa.readthedocs.io/en/latest/implementation.html)
+- [Case studies](https://hrhsa.readthedocs.io/en/latest/case-studies.html)
+- [Performance engineering and benchmarking](https://hrhsa.readthedocs.io/en/latest/performance.html)
 
 The public repository contains the package source, documentation, tests, and reproducibility tooling. Empirical telemetry datasets and project-specific research material are not distributed with the package.
-
-## Citation
-
-If you use hrHSA in scientific work, please cite the software and the corresponding methodological publication where appropriate. Machine-readable citation metadata are provided in `CITATION.cff`.
 
 ## Acknowledgements
 
@@ -249,7 +245,7 @@ Development of **hrHSA** was supported by the
 
 Large-scale profiling and benchmarking used infrastructure operated by the
 [Leibniz Supercomputing Centre (LRZ)](https://www.lrz.de/en/),
-including **CoolMUC-4** and the **terrabyte** High Performance Data Analytics platform operated jointly with the German Aerospace Center (DLR).
+including **CoolMUC-4** and the [**terrabyte** High Performance Data Analytics platform](https://www.dlr.de/de/eoc/forschung-transfer/projekte-und-missionen/terrabyte) operated jointly with the German Aerospace Center (DLR).
 
 ## License
 
