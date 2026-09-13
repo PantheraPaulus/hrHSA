@@ -39,7 +39,6 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
     "sphinx_autodoc_typehints",
-    "sphinxcontrib.mermaid",
     "sphinxcontrib.images"
 ]
 
