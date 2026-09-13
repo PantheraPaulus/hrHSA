@@ -83,7 +83,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/YOUR-GITHUB-NAME/YOUR-REPOSITORY",
+            "url": "https://github.com/PantheraPaulus/hrHSA",
             "icon": "fa-brands fa-github",
         }
     ],

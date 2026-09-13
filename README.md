@@ -15,8 +15,6 @@
   <a href="https://hrhsa-public.readthedocs.io/en/latest/getting_started.html">Getting started</a>
   ·
   <a href="https://hrhsa-public.readthedocs.io/en/latest/performance.html">Performance</a>
-  ·
-  <a href="https://github.com/PantheraPaulus/hrHSA/issues">Issues</a>
 </p>
 
 ---
