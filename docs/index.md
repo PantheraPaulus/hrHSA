@@ -1,5 +1,8 @@
 # hrHSA
-
+```{thumbnail} assets/hrHSA_logo.png
+:width: 100%
+:alt: hrHSA Logo
+```
 **hrHSA** (_High-resolution Habitat Selection Analysis_) is a scalable Python framework for rigorous statistical inference from spatially and temporally resolved observations. It integrates Lagrangian trajectory data with heterogeneous, time-varying Eulerian environmental fields to quantify how spatial structure, individual variation, stochastic dynamics, and changing conditions shape the probability distribution of observed locations. The framework combines resource-selection analysis, spatial point-process models, hierarchical frequentist and Bayesian inference, mechanistic movement models, and predictive simulation, with explicit treatment of availability, observation processes, uncertainty, validation, and prediction. This provides a unified statistical framework for studying multiscale interactions between moving entities and dynamic spatial fields. 
 
 Developed primarily for wildlife telemetry and spatial ecology, **hrHSA** addresses the more general problem of inferring interactions between actively or passively redistributing entities and their spatial context from a finite number of observations. In this broader perspective, trajectory-based habitat-selection problems belong to a wider class of spatiotemporal inference and inverse problems involving stochastic redistribution in heterogeneous environments.The underlying concepts therefore connect naturally to applications in geospatial and Earth-system science, epidemiology, environmental modelling, human mobility, transport and dispersal processes, and other fields concerned with spatial point patterns, trajectories, dynamic fields, and coupled movement–environment systems.
