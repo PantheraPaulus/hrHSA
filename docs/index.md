@@ -1,6 +1,6 @@
 ```{title} hrHSA — High-resolution Habitat Selection Analysis
 ```
-```{thumbnail} assets/hrHSA_logo.png
+```{thumbnail} assets/hrHSA_logo.jpg
 :width: 25%
 :alt: hrHSA Logo
 ```
