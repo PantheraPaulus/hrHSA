@@ -102,12 +102,8 @@ The discovery and mechanism history is retained separately from the public summa
 
 ```{thumbnail} assets/performance/03_profiling.png
 :width: 100%
-:alt: This experimental design identified three kernels with distinct computational
-bottlenecks and scaling behaviour (Fig. X). Point sampling is dominated by
-sparse access and task orchestration, statistical inference by repeated
-likelihood evaluation, and dense prediction by traversal of large predictor
-arrays. The following sections describe the algorithmic changes made to each
-kernel before returning to their scaling and execution geometry in Part III.
+:alt:
+This experimental design identified three kernels with distinct computational bottlenecks and scaling behaviour. Point sampling is dominated by sparse access and task orchestration, statistical inference by repeated likelihood evaluation, and dense prediction by traversal of large predictor arrays. The following sections describe the algorithmic changes made to each kernel before returning to their scaling and execution geometry in Part III.
 ```
 
 ## Part II — Optimization of the computational kernels
@@ -309,12 +305,8 @@ $$
 
 ```{thumbnail} assets/performance/04_benchmarking.png
 :width: 100%
-:alt: Equal physical-core budgets therefore do not imply equivalent execution
-environments. We explicitly benchmarked this trade-off for the spatial
-kernels and compared it with the placement of parallelism during statistical
-inference (Fig. Y). Intermediate process/thread geometries occupied the
-favourable time–memory region for both spatial kernels, whereas inference
-benefited most from coarse-grained concurrency across independent fits.
+:alt: 
+Equal physical-core budgets therefore do not imply equivalent execution environments. We explicitly benchmarked this trade-off for the spatial kernels and compared it with the placement of parallelism during statistical inference (Fig. Y). Intermediate process/thread geometries occupied the favourable time–memory region for both spatial kernels, whereas inference benefited most from coarse-grained concurrency across independent fits.
 ```
 
 Configurations such as `112×1`, `28×4`, `16×7`, and `8×14` therefore expose the same nominal 112-way concurrency on CoolMUC-4, but they differ substantially in process state, serialization, scheduler endpoints, memory replication, cache sharing, and transfer behaviour.

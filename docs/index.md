@@ -12,7 +12,8 @@ Developed primarily for wildlife telemetry and spatial ecology, **hrHSA** addres
 
 ```{thumbnail} assets/intro/hrHSA-summary.png
 :width: 100%
-:alt: Movement observations are combined with spatially and temporally resolved environmental data and transformed into model-ready resource- or step-selection datasets. hrHSA supports frequentist and hierarchical Bayesian RSF, SSF and iSSF estimation through a common analysis framework, from which fitted models can be used for spatial prediction, simulation and inference on individual and population-level effects. Integrated validation and diagnostic workflows include resampling, leave-one-individual-out and temporal cross-validation, as well as posterior predictive assessment.
+:alt:
+Movement observations are combined with spatially and temporally resolved environmental data and transformed into model-ready resource- or step-selection datasets. hrHSA supports frequentist and hierarchical Bayesian RSF, SSF and iSSF estimation through a common analysis framework, from which fitted models can be used for spatial prediction, simulation and inference on individual and population-level effects. Integrated validation and diagnostic workflows include resampling, leave-one-individual-out and temporal cross-validation, as well as posterior predictive assessment.
 :align: center
 ```
 
