@@ -248,7 +248,7 @@ The hierarchical model separates population-average effects, partially pooled in
 
 The Bayesian RSF documentation describes random slopes, prior specification, regularization, posterior diagnostics, prediction, and predictive validation in detail. The important conceptual point is that Bayesian and frequentist RSFs operate on the same ecological comparison; they differ in how uncertainty and individual variation are represented.
 
-## Where to go next
+## Towards more sophisticated analyses
 
 This first analysis introduced the central hrHSA workflow:
 
@@ -268,7 +268,7 @@ validation
 spatial inference
 ```
 
-From here, the appropriate extension depends on the ecological question.
+From here, the appropriate workflow depends on the ecological question.
 
 **Resource-selection functions** are appropriate when the primary question concerns relative use of environmental conditions across an availability domain. The RSF documentation covers alternative availability definitions, hierarchical effects, uncertainty, and model diagnostics.
 
