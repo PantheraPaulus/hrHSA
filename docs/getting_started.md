@@ -223,7 +223,7 @@ The map should therefore be interpreted comparatively. Locations with larger val
 
 Prediction is only meaningful within environmental conditions for which the fitted model is scientifically defensible. Extrapolation beyond the range represented in the fitting data should therefore be examined explicitly, particularly when nonlinear terms or interactions are present.
 
-## 7. Extend the analysis hierarchically
+## 7. Reformulate as a Bayesian hierarchical model
 
 The frequentist workflow above estimates one population-level selection relationship. Repeated observations from several individuals also allow variation among animals to be estimated explicitly through a hierarchical Bayesian RSF.
 
@@ -248,7 +248,7 @@ The hierarchical model separates population-average effects, partially pooled in
 
 The Bayesian RSF documentation describes random slopes, prior specification, regularization, posterior diagnostics, prediction, and predictive validation in detail. The important conceptual point is that Bayesian and frequentist RSFs operate on the same ecological comparison; they differ in how uncertainty and individual variation are represented.
 
-## Towards more sophisticated analyses
+## From the example to real-world applications
 
 This first analysis introduced the central hrHSA workflow:
 
