@@ -111,7 +111,7 @@ dev = [
 
 [project.urls]
 Homepage = "https://github.com/PantheraPaulus/hrHSA"
-Documentation = "https://hrhsa-public.readthedocs.io/"
+Documentation = "https://hrhsa.readthedocs.io/"
 Repository = "https://github.com/PantheraPaulus/hrHSA"
 Issues = "https://github.com/PantheraPaulus/hrHSA/issues"
 
